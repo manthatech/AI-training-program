@@ -1,0 +1,6 @@
+Hello, World!
+This is line 2.
+Python file handling is easy.
+Hello, World!
+This is line 2.
+Python file handling is easy.
