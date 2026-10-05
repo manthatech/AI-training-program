@@ -58,8 +58,10 @@ def handle_tool_calls(ai_message, messages, session_id, sources, tools_used):
     for tool_call in ai_message.tool_calls:
         name = tool_call["name"]
         args = tool_call["args"]
+        print(f"Calling Tool {name} --- {args}")
         try:
             result = run_tool(name, args, session_id, sources)
+            print(f"Tool Result = {result}")
             ok = True
         except Exception as error:
             # Don't crash - tell the LLM what went wrong so it can try something else.
@@ -82,6 +84,7 @@ def chat(session_id, user_message):
 
     for round_number in range(config.MAX_TOOL_ROUNDS):
         ai_message = llm.invoke(messages)
+        print(f"AI Message = {ai_message}")
         messages.append(ai_message)
 
         if not ai_message.tool_calls:          # no tools wanted -> this is the final answer

@@ -95,6 +95,8 @@ def send_message(request: ChatRequest, background_tasks: BackgroundTasks):
     """Send a message and get the full reply (with citations and the tools that were used)."""
     session_id = get_or_create_session(request.session_id)
     try:
+        print("Inside Chat API!")
+        print(f"Question = {request.message}")
         result = chat.chat(session_id, request.message)
     except Exception as error:
         raise HTTPException(502, f"LLM error: {error}")

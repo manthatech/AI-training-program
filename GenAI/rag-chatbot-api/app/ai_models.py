@@ -32,10 +32,23 @@ def load_models():
 
     print(f"Loading embedding model {config.EMBEDDING_MODEL}")
     embedder = SentenceTransformer(config.EMBEDDING_MODEL)
+    copy_weights_to_ram(embedder)
 
     if config.RERANK_ENABLED:
         print(f"Loading reranker {config.RERANK_MODEL}")
         reranker = CrossEncoder(config.RERANK_MODEL)
+        copy_weights_to_ram(reranker)
+
+
+def copy_weights_to_ram(model):
+    """Give every weight its own freshly allocated memory.
+
+    transformers memory-maps the weight file, so some weights can start at a
+    misaligned address. On macOS 12 the math library then returns NaN scores
+    (or crashes with "Bus error"). A copy is always properly aligned.
+    """
+    for param in model.parameters():
+        param.data = param.data.clone()
 
 
 def embed(texts):
