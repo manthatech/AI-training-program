@@ -41,7 +41,7 @@ def startup():
 
 def check_api_key(x_api_key: str = Header(default=None)):
     """If an API_KEY is set in .env, every /api request must send it in the X-API-Key header."""
-    if config.OPENAI_API_KEY and x_api_key != config.OPENAI_API_KEY:
+    if config.API_KEY and x_api_key != config.API_KEY:
         raise HTTPException(401, "Invalid or missing X-API-Key header")
 
 

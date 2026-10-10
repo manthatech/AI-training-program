@@ -16,7 +16,7 @@ load_dotenv()
 
 # ---------------------------------------------------------------- App
 APP_NAME = "RAG Chatbot API"
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")            # if set, clients must send header "X-API-Key"
+API_KEY = os.getenv("API_KEY")            # if set, clients must send header "X-API-Key"
 DATA_DIR = os.getenv("DATA_DIR", "data")  # the database and vector index are saved here
 
 # ---------------------------------------------------------------- LLM

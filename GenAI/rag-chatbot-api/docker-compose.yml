@@ -1,6 +1,6 @@
 services:
   api:
-    build: .
+    build: ./backend
     ports: ["8000:8000"]
-    env_file: .env
-    volumes: ["./data:/app/data"]   # SQLite, Chroma index and model cache persist here
+    env_file: ./backend/.env
+    volumes: ["./backend/data:/app/data"]   # SQLite, Chroma index and model cache persist here

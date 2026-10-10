@@ -1,4 +1,29 @@
-# RAG Chatbot API (FastAPI backend)
+# RAG Chatbot (FastAPI backend + React UI)
+
+```
+rag-chatbot-api/
+├── backend/    FastAPI app, tests, Dockerfile, .env, data/
+└── frontend/   React + Vite chat UI
+```
+
+**Run it** (two terminals):
+
+```bash
+# 1. backend  -> http://localhost:8000
+cd backend
+uvicorn app.main:app --reload
+
+# 2. frontend -> http://localhost:3000
+cd frontend
+npm install
+npm run dev
+```
+
+The UI has a conversation list, a streaming chat with clickable citations, and a side panel with
+**Sources** (the passages behind an answer), **Library** (upload and delete PDFs) and **Memory**
+(the session summary and user profile). The dev server forwards `/api` and `/health` to the backend.
+If `API_KEY` is set in `backend/.env`, put the same value in `frontend/.env.local` as `VITE_API_KEY`.
+
 
 A chatbot you can talk to over HTTP. It can:
 
@@ -20,7 +45,7 @@ Capstone backend for **Phase 4 — Generative AI**:
 
 ## Read the code in this order
 
-Every file is short and has comments explaining what's going on. Start at the top:
+Every file is short and has comments explaining what's going on. The files are in `backend/app/`. Start at the top:
 
 | # | File | What it does |
 |---|---|---|
@@ -75,6 +100,7 @@ POST /api/v1/chat  {"message": "What's the refund policy?"}
 ## Quick start
 
 ```bash
+cd backend
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
